@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  web:
+    container_name: web
+    build:
+      dockerfile: docker/Dockerfile
+      context: .
+    ports:
+      - 1025:1025
+    command: scripts/web/startup.sh -m -l
+    restart: on-failure
+    env_file:
+      - ./conf/.env
+    volumes:
+      - ./:/code
+    networks:
+      - food_network
+
+networks:
+  food_network:
+    external: True
