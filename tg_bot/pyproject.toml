@@ -47,6 +47,7 @@ poetry = "1.5.1"
 PyYAML = "6.0.1"
 aiohttp = "3.9.3"
 redis = "5.0.1"
+miniopy-async = "1.17"
 
 
 [tool.poetry.group.dev.dependencies]

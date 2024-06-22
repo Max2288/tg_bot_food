@@ -40,3 +40,11 @@ role_to_keyboard_getter: dict[str, Callable[[P.kwargs], types.ReplyKeyboardMarku
     'user': _get_keyboard_user,
     'admin': _get_keyboard_admin,
 }
+
+
+def create_star_buttons():
+    kb = []
+    for i in range(1, 6):
+        kb.append([(types.InlineKeyboardButton(text="★"*i + '☆'*(5-i), callback_data=f"rating_{i}"))])
+
+    return types.InlineKeyboardMarkup(inline_keyboard=kb)

@@ -50,8 +50,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigIntegerField(primary_key=True, serialize=False)),
                 ('username', models.TextField()),
-                ('role', models.TextField(choices=[('USER', 'USER'), ('OPERATOR', 'OPERATOR'), ('ADMIN', 'ADMIN')], default='USER')),
-                ('address', models.ForeignKey(db_column='address', on_delete=django.db.models.deletion.CASCADE, to='food_free_app.address')),
             ],
             options={
                 'verbose_name': 'user',

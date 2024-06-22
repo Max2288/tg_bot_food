@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import ORJSONResponse
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -17,10 +17,12 @@ router = APIRouter()
 @router.get("/{id}")
 async def get_products_with_shop(
         id: int,
-        session: AsyncSession = Depends(get_session)
+        session: AsyncSession = Depends(get_session),
+    limit: int = Query(5, description="Number of shops to return"),
+    offset: int = Query(0, description="Offset from the beginning of the list"),
 ) -> ORJSONResponse:
-    products = await get_products_by_shop(session, id)
-    if products is None:
+    products = await get_products_by_shop(session, id, limit, offset)
+    if not products:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No products found")
     shop = await get_shop(session, id)
     if shop is None:

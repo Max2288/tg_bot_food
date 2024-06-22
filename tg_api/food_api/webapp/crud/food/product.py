@@ -4,12 +4,14 @@ from webapp.models.food.product import Product
 from webapp.models.food.shop import Shop
 
 
-async def get_products_by_shop(session, shop_id: int):
+async def get_products_by_shop(session, shop_id: int, limit=5, offset=0):
     result = await session.execute(
         select(Product)
         .where(Product.shop == shop_id)
         .join(Shop)
         .order_by(Product.is_hot)
+        .limit(limit)
+        .offset(offset)
     )
     return result.scalars().all()
 

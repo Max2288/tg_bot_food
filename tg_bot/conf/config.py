@@ -18,4 +18,11 @@ class Settings(BaseSettings):
 
     MAX_DELIVERY_WAIT_TIME: int = 60 * 10
 
+    BUCKET_NAME: str = 'food'
+    MINIO_LOGIN: str
+    MINIO_PASSWORD:str
+    MINIO_URL: str
+
+    API_KEY: str
+
 settings = Settings()

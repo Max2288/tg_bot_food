@@ -12,5 +12,5 @@ NAMING_CONVENTION = {
 
 DEFAULT_SCHEMA = 'food'
 
-metadata = MetaData(naming_convention=NAMING_CONVENTION)
+metadata = MetaData(naming_convention=NAMING_CONVENTION, schema=DEFAULT_SCHEMA)
 Base = declarative_base(metadata=metadata)

@@ -128,77 +128,77 @@ SHOPS = [
         "id": 1,
         "name": "Moscow Mart",
         "description": "A popular shopping destination in Moscow.",
-        "image": "moscow_mart.png",
+        "image": "files/some_meme.jpg",
         "address": 1
     },
     {
         "id": 2,
         "name": "Broadway Boutique",
         "description": "Trendy boutique in the heart of New York.",
-        "image": "broadway_boutique.png",
+        "image": "files/some_meme.jpg",
         "address": 2
     },
     {
         "id": 3,
         "name": "London Emporium",
         "description": "Elegant emporium on Baker Street.",
-        "image": "london_emporium.png",
+        "image": "files/some_meme.jpg",
         "address": 3
     },
     {
         "id": 4,
         "name": "Toronto Treasures",
         "description": "Hidden gems of Toronto's King Street.",
-        "image": "toronto_treasures.png",
+        "image": "files/some_meme.jpg",
         "address": 4
     },
     {
         "id": 5,
         "name": "Sydney Souvenirs",
         "description": "Unique souvenirs from Sydney.",
-        "image": "sydney_souvenirs.png",
+        "image": "files/some_meme.jpg",
         "address": 5
     },
     {
         "id": 6,
         "name": "Berlin Bazaar",
         "description": "Diverse market in Berlin.",
-        "image": "berlin_bazaar.png",
+        "image": "files/some_meme.jpg",
         "address": 6
     },
     {
         "id": 7,
         "name": "Parisian Paradise",
         "description": "Luxury items on Champs-Élysées.",
-        "image": "parisian_paradise.png",
+        "image": "files/some_meme.jpg",
         "address": 7
     },
     {
         "id": 8,
         "name": "Roman Relics",
         "description": "Historic finds on Via del Corso.",
-        "image": "roman_relics.png",
+        "image": "files/some_meme.jpg",
         "address": 8
     },
     {
         "id": 9,
         "name": "Madrid Market",
         "description": "Vibrant market on Gran Vía.",
-        "image": "madrid_market.png",
+        "image": "files/some_meme.jpg",
         "address": 9
     },
     {
         "id": 10,
         "name": "Tokyo Treasures",
         "description": "Exclusive items from Shibuya.",
-        "image": "tokyo_treasures.png",
+        "image": "files/some_meme.jpg",
         "address": 10
     },
     {
         'id': 11,
         'name': 'Пятёрочка',
         'description': 'Интересный магазин',
-        'image': 'some_image_here',
+        'image': 'files/peterechka.jpg',
         'address': 11
     }
 ]
@@ -207,31 +207,59 @@ SHOPS = [
 PRODUCTS = [
     {
         'id': 1,
-        'name': 'Product 1',
+        'name': 'Яблоко зеленое',
         'description': 'Description for Product 1',
         'price': 9.99,
         'quantity': 50,
-        'image': 'product1.jpg',
+        'image': 'files/green_apple.jpg',
         'is_hot': True,
-        'shop_id': 11,  # Assuming shop ID is 11 for all products
+        'shop_id': 11,
     },
     {
         'id': 2,
-        'name': 'Product 2',
-        'description': 'Description for Product 2',
+        'name': 'Помидор обыкновенный',
+        'description': 'Бывает и такое у нас',
         'price': 19.99,
         'quantity': 30,
-        'image': 'product2.jpg',
+        'image': 'files/pomidor.jpg',
         'is_hot': False,
         'shop_id': 11,
     },
     {
         'id': 3,
-        'name': 'Product 3',
-        'description': 'Description for Product 3',
+        'name': 'Кукумбер',
+        'description': 'А чего сюда зашел, а ну иди назад, быстро',
         'price': 14.50,
         'quantity': 20,
-        'image': 'product3.jpg',
+        'image': 'files/cucumber.jpg',
+        'is_hot': True,
+        'shop_id': 11,
+    },
+    {
+        'id': 4,
+        'name': 'Кукумбер2',
+        'description': 'А чего сюда зашел, а ну иди назад, быстро',
+        'price': 14.50,
+        'quantity': 20,
+        'image': 'files/cucumber.jpg',
+        'is_hot': True,
+        'shop_id': 11,
+    },{
+        'id': 5,
+        'name': 'Кукумбер3',
+        'description': 'А чего сюда зашел, а ну иди назад, быстро',
+        'price': 14.50,
+        'quantity': 20,
+        'image': 'files/cucumber.jpg',
+        'is_hot': True,
+        'shop_id': 11,
+    },{
+        'id': 6,
+        'name': 'Кукумбер4',
+        'description': 'А чего сюда зашел, а ну иди назад, быстро',
+        'price': 14.50,
+        'quantity': 20,
+        'image': 'files/cucumber.jpg',
         'is_hot': True,
         'shop_id': 11,
     },

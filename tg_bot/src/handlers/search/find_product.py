@@ -1,10 +1,12 @@
 from conf.config import settings
-from src.buttons.main.back import get_back_button
+from src.buttons.main.back import get_back_button, get_feedback_with_back_buttons
 from src.callback.search.product import ProductCallback
 from src.handlers.search import search_router
 from aiogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
 from aiohttp import ClientResponseError
 from aiogram.fsm.context import FSMContext
+
+from src.utils.minio import get_input_file
 from src.utils.request import do_request
 
 
@@ -22,15 +24,15 @@ def prepare_product_data(data: dict) -> str:
 async def handle_product_callback(callback_query: CallbackQuery, callback_data: ProductCallback, state: FSMContext):
     await callback_query.message.delete()
     try:
-        data = await do_request(
-            f'{settings.TINDER_BACKEND_HOST}/api/v1/product/{callback_data.id}',
+        product, _ = await do_request(
+            f'api/v1/product/{callback_data.id}',
             method='GET',
         )
+        input_file = await get_input_file(product.get('image'))
         await callback_query.message.answer_photo(
-            photo='https://www.souz-pribor.ru/upload/iblock/087/MI-3123-Smartec.jpeg',
-            # потом должно быть data.get('image')
-            caption=prepare_product_data(data),
-            reply_markup=get_back_button(previous_id=callback_data.shop_id)
+            photo=input_file,
+            caption=prepare_product_data(product),
+            reply_markup=get_feedback_with_back_buttons(previous_id=callback_data.shop_id)
         )
         await state.set_state(None)
     except ClientResponseError:

@@ -14,12 +14,13 @@ router = APIRouter()
 
 @router.get("/shop", response_model=list[ShopResponse])
 async def get_shops(
-        longitude: float = Query(None, description="Longitude of the location"),
-        latitude: float = Query(None, description="Latitude of the location"),
-        session: AsyncSession = Depends(get_session)
+    longitude: float = Query(None, description="Longitude of the location"),
+    latitude: float = Query(None, description="Latitude of the location"),
+    limit: int = Query(5, description="Number of shops to return"),
+    offset: int = Query(0, description="Offset from the beginning of the list"),
+    session: AsyncSession = Depends(get_session)
 ) -> ORJSONResponse:
-    shops = await get_near_shops(session, longitude, latitude)
+    shops = await get_near_shops(session, longitude, latitude, limit, offset)
     if not shops:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No shops found")
     return ORJSONResponse(content=[shop.to_dict() for shop in shops], status_code=status.HTTP_200_OK)
-

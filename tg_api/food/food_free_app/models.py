@@ -31,11 +31,6 @@ class Address(IDMixin):
 class User(models.Model):
     id = models.BigIntegerField(primary_key=True, editable=True)
     username = models.TextField()
-    role = models.TextField(
-        choices=RoleChoices.choices,
-        default=RoleChoices.USER
-    )
-    address = models.ForeignKey(Address, on_delete=models.CASCADE, db_column='address')
 
     class Meta:
         db_table = '"food"."user"'
@@ -52,6 +47,9 @@ class Shop(IDMixin):
         db_table = '"food"."shop"'
         verbose_name = _('shop')
 
+    def __str__(self):
+        return self.name
+
 
 class Product(IDMixin):
     name = models.TextField()
@@ -65,6 +63,9 @@ class Product(IDMixin):
     class Meta:
         db_table = '"food"."product"'
         verbose_name = _('product')
+
+    def __str__(self):
+        return f'Продукт: {self.name} из магазина {self.shop.name}'
 
 
 class FeedBack(IDMixin):
