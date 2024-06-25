@@ -1,6 +1,5 @@
 from orjson import orjson
 from sqlalchemy.orm import QueryableAttribute
-
 from webapp.models.meta import Base
 
 
@@ -14,7 +13,7 @@ class BaseDecoder(Base):
 
         hidden = self._hidden_fields if hasattr(self, "_hidden_fields") else []
         default = self._default_fields if hasattr(self, "_default_fields") else []
-        default.extend(['id', 'modified_at', 'created_at'])
+        default.extend(["id", "modified_at", "created_at"])
 
         if not _path:
             _path = self.__tablename__.lower()
@@ -72,9 +71,9 @@ class BaseDecoder(Base):
                         )
                 else:
                     if (
-                            self.__mapper__.relationships[key].query_class is not None
-                            or self.__mapper__.relationships[key].instrument_class
-                            is not None
+                        self.__mapper__.relationships[key].query_class is not None
+                        or self.__mapper__.relationships[key].instrument_class
+                        is not None
                     ):
                         item = getattr(self, key)
                         if item is not None:
@@ -103,7 +102,8 @@ class BaseDecoder(Base):
                 if hasattr(val, "to_dict"):
                     ret_data[key] = val.to_dict(
                         show=list(show),
-                        _hide=list(_hide), _path=("%s.%s" % (_path, key.lower()))
+                        _hide=list(_hide),
+                        _path=("%s.%s" % (_path, key.lower())),
                     )
                 else:
                     try:

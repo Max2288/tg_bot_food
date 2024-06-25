@@ -1,10 +1,8 @@
-from fastapi import APIRouter, HTTPException, status, UploadFile, File
+from conf.config import settings
+from fastapi import APIRouter, File, HTTPException, UploadFile, status
 from fastapi.responses import ORJSONResponse
 from loguru import logger
-
 from miniopy_async import Minio
-
-from conf.config import settings
 
 router = APIRouter()
 
@@ -12,8 +10,9 @@ client = Minio(
     settings.MINIO_URL,
     access_key=settings.MINIO_LOGIN,
     secret_key=settings.MINIO_PASSWORD,
-    secure=False
+    secure=False,
 )
+
 
 async def create_bucket_if_not_exists(bucket_name):
     exists = await client.bucket_exists(bucket_name)
@@ -39,10 +38,15 @@ async def load_to_minio(save_name: str, file: UploadFile = File(...)):
             bucket_name=settings.BUCKET_NAME,
             object_name=file_path,
             data=file,
-            length=file_length
+            length=file_length,
         )
-        logger.info(f"File {file_path} successfully uploaded to bucket {settings.BUCKET_NAME}.")
+        logger.info(
+            f"File {file_path} successfully uploaded to bucket {settings.BUCKET_NAME}."
+        )
         return ORJSONResponse({"message": "success"})
     except Exception as e:
         logger.error(f"Произошла ошибка во время загрузки файла: {e}")
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Internal Server Error")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal Server Error",
+        )

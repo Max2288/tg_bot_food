@@ -1,7 +1,6 @@
+from conf.config import settings
 from redis.asyncio import ConnectionPool
 from redis.asyncio.client import Redis
-
-from conf.config import settings
 
 pool = ConnectionPool(
     host=settings.REDIS_HOST,

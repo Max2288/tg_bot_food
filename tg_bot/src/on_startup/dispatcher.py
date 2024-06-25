@@ -1,10 +1,8 @@
 from aiogram import Bot, Dispatcher
-
+from aiogram.fsm.storage.redis import RedisStorage
 from src.handlers.feedback.router import feedback_router
 from src.handlers.main.router import main_router
 from src.handlers.search.router import search_router
-from aiogram.fsm.storage.redis import RedisStorage
-
 from src.integrations.redis import redis
 from src.middleware.auth import AuthMiddleware
 

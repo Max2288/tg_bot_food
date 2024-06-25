@@ -1,10 +1,9 @@
-from sqlalchemy import select
 from geoalchemy2.functions import ST_DWithin, ST_GeogFromText
-from webapp.models.food.shop import Shop
+from sqlalchemy import select
 from webapp.models.food.address import Address
+from webapp.models.food.shop import Shop
 
 KM_CONTAINS = 1000
-
 
 
 async def get_near_shops(session, longitude, latitude, limit, offset, radius=10):

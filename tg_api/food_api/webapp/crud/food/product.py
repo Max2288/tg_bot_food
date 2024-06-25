@@ -1,5 +1,4 @@
 from sqlalchemy import select
-
 from webapp.models.food.product import Product
 from webapp.models.food.shop import Shop
 
@@ -18,7 +17,5 @@ async def get_products_by_shop(session, shop_id: int, limit=5, offset=0):
 
 async def get_product_by_id(session, product_id: int):
     return (
-        await session.scalars(
-            select(Product).where(Product.id == product_id)
-        )
+        await session.scalars(select(Product).where(Product.id == product_id))
     ).one_or_none()

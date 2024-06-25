@@ -3,12 +3,11 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Annotated, cast
 
+from conf.config import settings
 from fastapi import Depends, Header, HTTPException
 from jose import JWTError, jwt
 from starlette import status
 from typing_extensions import TypedDict
-
-from conf.config import settings
 from webapp.models.user.user import User
 
 
@@ -24,9 +23,9 @@ class JwtAuth:
 
     def create_token(self, user: User) -> str:
         access_token = {
-            'uid': uuid.uuid4().hex,
-            'exp': datetime.utcnow() + timedelta(days=6),
-            'user_id': user.id
+            "uid": uuid.uuid4().hex,
+            "exp": datetime.utcnow() + timedelta(days=6),
+            "user_id": user.id,
         }
         return jwt.encode(access_token, self.secret)
 

@@ -3,17 +3,16 @@ from asyncio import Task
 from typing import Any
 
 from aiogram import Bot, Dispatcher, types
-from fastapi import Depends, APIRouter
+from fastapi import APIRouter, Depends
 from fastapi.responses import ORJSONResponse
-from starlette.requests import Request
-
 from src.integrations.tg_bot import get_dispatcher, get_tg_bot
 from src.utils.background_tasks import tg_background_tasks
+from starlette.requests import Request
 
 router = APIRouter()
 
 
-@router.post('/tg')
+@router.post("/tg")
 async def tg_api(
     request: Request,
     dp: Dispatcher = Depends(get_dispatcher),
@@ -29,4 +28,4 @@ async def tg_api(
 
     print(data)
 
-    return ORJSONResponse({'success': True})
+    return ORJSONResponse({"success": True})

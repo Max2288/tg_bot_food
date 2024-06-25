@@ -5,10 +5,8 @@ from typing import AsyncIterator
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
 from src.api.tg.api import tg_router
 from src.integrations.tg_bot import bot
-
 from src.on_startup.webhook import setup_webhook
 from src.utils.background_tasks import tg_background_tasks
 
@@ -16,10 +14,10 @@ from src.utils.background_tasks import tg_background_tasks
 def setup_middleware(app: FastAPI) -> None:
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=['*'],  # type: ignore
+        allow_origins=["*"],  # type: ignore
         allow_credentials=True,  # type: ignore
-        allow_methods=['*'],  # type: ignore
-        allow_headers=['*'],  # type: ignore
+        allow_methods=["*"],  # type: ignore
+        allow_headers=["*"],  # type: ignore
     )
 
 
@@ -29,22 +27,22 @@ def setup_routers(app: FastAPI) -> None:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
-    print('START APP')
+    print("START APP")
     await setup_webhook(bot)
 
     yield
 
-    print('Stopping')
+    print("Stopping")
 
     while len(tg_background_tasks) > 0:
-        print('%s tasks left', len(tg_background_tasks))
+        print("%s tasks left", len(tg_background_tasks))
         await asyncio.sleep(0)
 
-    print('Stopped')
+    print("Stopped")
 
 
 def create_app() -> FastAPI:
-    app = FastAPI(docs_url='/swagger', lifespan=lifespan)
+    app = FastAPI(docs_url="/swagger", lifespan=lifespan)
 
     setup_middleware(app)
     setup_routers(app)

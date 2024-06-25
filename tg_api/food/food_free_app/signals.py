@@ -1,9 +1,11 @@
-from django.db.models.signals import post_migrate
-from django.dispatch import receiver
 from itertools import islice
-from food_free_app import models
+
+from django.db.models.signals import post_migrate
 from django.db.utils import IntegrityError
-from food_free_app.constants import ADRESES, SHOPS, PRODUCTS
+from django.dispatch import receiver
+from food_free_app import models
+from food_free_app.constants import ADRESES, PRODUCTS, SHOPS
+
 
 def create_objects(model: models.models, bulk_items: list[dict] = None):
     batch_size = 100
@@ -33,7 +35,9 @@ def create_initial_models(sender, **kwargs):
             create_objects_with_skip(models.Address, ADRESES)
         if not models.Shop.objects.exists():
             for shop_data in SHOPS:
-                shop_data['address'] = models.Address.objects.get(id=shop_data['address'])
+                shop_data["address"] = models.Address.objects.get(
+                    id=shop_data["address"]
+                )
             create_objects_with_skip(models.Shop, SHOPS)
         if not models.Product.objects.exists():
             create_objects_with_skip(models.Product, PRODUCTS)

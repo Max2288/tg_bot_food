@@ -1,15 +1,12 @@
-from sqlalchemy import select, exists
+from sqlalchemy import exists, select
 from sqlalchemy.ext.asyncio import AsyncSession
-
 from webapp.models.user.user import User
-
 from webapp.schema.user.user import UserRegister
 
 
 async def check_user(session: AsyncSession, user_id: int) -> bool:
     query = select(exists().where(User.id == user_id))
     return bool(await session.scalar(query))
-
 
 
 async def create_user(session: AsyncSession, user_info: UserRegister):
@@ -25,11 +22,6 @@ async def create_user(session: AsyncSession, user_info: UserRegister):
         await session.rollback()
         return None
 
+
 async def get_user(session: AsyncSession, user_id: int) -> User:
-    return (
-        await session.scalars(
-            select(User).where(
-                User.id == user_id
-            )
-        )
-    ).one_or_none()
+    return (await session.scalars(select(User).where(User.id == user_id))).one_or_none()

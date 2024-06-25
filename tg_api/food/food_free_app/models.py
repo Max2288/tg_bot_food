@@ -1,8 +1,8 @@
-from django.db import models
 from django.contrib.gis.db.models import PointField
-
-from food_free_app.choices import RoleChoices, StatusChoices
+from django.db import models
 from django.utils.translation import gettext_lazy as _
+from food_free_app.choices import RoleChoices, StatusChoices
+
 
 class IDMixin(models.Model):
     """Миксин для добавления поля ID к моделям."""
@@ -25,7 +25,7 @@ class Address(IDMixin):
 
     class Meta:
         db_table = '"food"."address"'
-        verbose_name = _('address')
+        verbose_name = _("address")
 
 
 class User(models.Model):
@@ -34,18 +34,18 @@ class User(models.Model):
 
     class Meta:
         db_table = '"food"."user"'
-        verbose_name = _('user')
+        verbose_name = _("user")
 
 
 class Shop(IDMixin):
     name = models.TextField()
     description = models.TextField()
     image = models.TextField()
-    address = models.ForeignKey(Address, on_delete=models.CASCADE, db_column='address')
+    address = models.ForeignKey(Address, on_delete=models.CASCADE, db_column="address")
 
     class Meta:
         db_table = '"food"."shop"'
-        verbose_name = _('shop')
+        verbose_name = _("shop")
 
     def __str__(self):
         return self.name
@@ -58,48 +58,49 @@ class Product(IDMixin):
     quantity = models.IntegerField()
     image = models.TextField()
     is_hot = models.BooleanField()
-    shop = models.ForeignKey(Shop, on_delete=models.DO_NOTHING, db_column='shop')
+    shop = models.ForeignKey(Shop, on_delete=models.DO_NOTHING, db_column="shop")
 
     class Meta:
         db_table = '"food"."product"'
-        verbose_name = _('product')
+        verbose_name = _("product")
 
     def __str__(self):
-        return f'Продукт: {self.name} из магазина {self.shop.name}'
+        return f"Продукт: {self.name} из магазина {self.shop.name}"
 
 
 class FeedBack(IDMixin):
     score = models.IntegerField()
     description = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column='user')
-    shop = models.ForeignKey(Shop, on_delete=models.DO_NOTHING, db_column='shop')
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column="user")
+    shop = models.ForeignKey(Shop, on_delete=models.DO_NOTHING, db_column="shop")
 
     class Meta:
         db_table = '"food"."feedback"'
-        verbose_name = _('feedback')
+        verbose_name = _("feedback")
 
 
 class Subscription(IDMixin):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column='user')
-    shop = models.ForeignKey(Shop, on_delete=models.DO_NOTHING, db_column='shop')
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column="user")
+    shop = models.ForeignKey(Shop, on_delete=models.DO_NOTHING, db_column="shop")
 
     class Meta:
         db_table = '"food"."subscription"'
-        verbose_name = _('subscription')
+        verbose_name = _("subscription")
 
 
 class MailingList(IDMixin):
     message = models.TextField()
-    shop = models.ForeignKey(Shop, on_delete=models.DO_NOTHING, db_column='shop')
+    shop = models.ForeignKey(Shop, on_delete=models.DO_NOTHING, db_column="shop")
     date = models.DateTimeField()
 
     class Meta:
         db_table = '"food"."mailinglist"'
-        verbose_name = _('mailinglist')
+        verbose_name = _("mailinglist")
+
 
 class MailingMessage(IDMixin):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column='user')
-    shop = models.ForeignKey(Shop, on_delete=models.DO_NOTHING, db_column='shop')
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column="user")
+    shop = models.ForeignKey(Shop, on_delete=models.DO_NOTHING, db_column="shop")
     date = models.DateTimeField()
     status = models.TextField(
         choices=StatusChoices.choices, default=StatusChoices.CREATED
@@ -107,4 +108,4 @@ class MailingMessage(IDMixin):
 
     class Meta:
         db_table = '"food"."mailingmessage"'
-        verbose_name = _('mailingmessage')
+        verbose_name = _("mailingmessage")

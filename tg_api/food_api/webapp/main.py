@@ -1,18 +1,19 @@
 from contextlib import asynccontextmanager
 from typing import AsyncIterator
 
+from conf.config import settings
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
 from webapp.api import api
-from conf.config import settings
+
+
 def setup_middleware(app: FastAPI) -> None:
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=['*'],
+        allow_origins=["*"],
         allow_credentials=True,
-        allow_methods=['*'],
-        allow_headers=['*'],
+        allow_methods=["*"],
+        allow_headers=["*"],
     )
 
 
@@ -23,13 +24,13 @@ def setup_routers(app: FastAPI) -> None:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
-    print('START APP')
+    print("START APP")
     yield
-    print('END APP')
+    print("END APP")
 
 
 def create_app() -> FastAPI:
-    app = FastAPI(docs_url='/swagger', lifespan=lifespan)
+    app = FastAPI(docs_url="/swagger", lifespan=lifespan)
 
     setup_middleware(app)
     setup_routers(app)

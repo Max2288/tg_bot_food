@@ -2,11 +2,8 @@ from typing import Any, Dict, Optional
 
 import aiohttp
 from aiohttp.typedefs import LooseHeaders
-from multidict import CIMultiDict
-
-
 from conf.config import settings
-
+from multidict import CIMultiDict
 
 
 class ClientSessionWithCorrId(aiohttp.ClientSession):
@@ -19,7 +16,8 @@ class ClientSessionWithCorrId(aiohttp.ClientSession):
 async def do_request(
     url: str,
     params: Optional[Dict[str, Any]] = None,
-    headers: Optional[Dict[str, Any]] = None, method: str = 'POST'
+    headers: Optional[Dict[str, Any]] = None,
+    method: str = "POST",
 ) -> Any:
 
     timeout = aiohttp.ClientTimeout(total=3)
@@ -31,8 +29,8 @@ async def do_request(
             try:
                 async with session.request(
                     method,
-                        f'{settings.TINDER_BACKEND_HOST}{url}',
-                        headers=headers,
+                    f"{settings.FOOD_BACKEND_HOST}{url}",
+                    headers=headers,
                     json=params,
                 ) as response:
                     return await response.json(), response.status
@@ -42,4 +40,4 @@ async def do_request(
     if final_exc is not None:
         raise final_exc
 
-    raise RuntimeError('Unsupported')
+    raise RuntimeError("Unsupported")

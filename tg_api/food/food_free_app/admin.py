@@ -9,7 +9,7 @@ models_to_register = [
     FeedBack,
     Subscription,
     MailingList,
-    MailingMessage
+    MailingMessage,
 ]
 
 

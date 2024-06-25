@@ -1,6 +1,5 @@
 from fastapi import APIRouter
-
-from webapp.api import test, search, shop, product, minio, auth, feedback
+from webapp.api import auth, feedback, minio, product, search, shop, test
 
 router = APIRouter()
 
