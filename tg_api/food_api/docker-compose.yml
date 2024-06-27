@@ -12,8 +12,8 @@ services:
       - web
     networks:
       - food_network
+      - nginx_certs:/etc/ssl/certs
   web:
-    container_name: web
     build:
       dockerfile: docker/Dockerfile
       context: .
@@ -30,7 +30,6 @@ services:
   minio:
     image: minio/minio
     command: server --console-address ":9001" /data/
-    container_name: food_minio
     environment:
       MINIO_ROOT_USER: "minioadmin"
       MINIO_ROOT_PASSWORD: "minioadmin"
@@ -44,3 +43,5 @@ networks:
   food_network:
     external: True
     driver: bridge
+  nginx_certs:
+    external: true
