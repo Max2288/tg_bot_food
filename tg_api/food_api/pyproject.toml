@@ -31,7 +31,7 @@ extend_skip = ["backend_utils", "alembic", "*pypoetry*"]
 name = "food_api"
 version = "0.1.0"
 description = ""
-authors = ["Bezborodov Max"]
+authors = [""]
 
 [tool.poetry.dependencies]
 python = "^3.10"

@@ -16,7 +16,7 @@ multi_line_output = 3
 name = "food"
 version = "0.1.0"
 description = ""
-authors = ["Bezborodov Max"]
+authors = [""]
 
 [tool.poetry.dependencies]
 python = "^3.10"

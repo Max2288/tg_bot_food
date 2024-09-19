@@ -28,10 +28,10 @@ known_local_folder = ['webapp', 'backend_utils', 'conf']
 extend_skip = ["backend_utils", "alembic", "*pypoetry*"]
 
 [tool.poetry]
-name = "sirius"
+name = "tg_bot"
 version = "0.1.0"
 description = ""
-authors = ["Gladkikh Anton"]
+authors = [""]
 
 [tool.poetry.dependencies]
 aiogram = "3.4.1"
